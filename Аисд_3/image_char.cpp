@@ -6,32 +6,35 @@ template <>
 class Image<char> {
 private:
 	size_t _l, _w;
-	char** _px;
+	vector<vector<char>> _px;
 
 public:
 	Image() : _l(0), _w(0) {
-		_px = new char* [_l];
-		for (size_t i = 0; i < _l; i++) {
-			_px[i] = new char[_w];
+		_px.resize(_w);
+		for (size_t i = 0; i < _w; ++i)
+		{
+			_px[i].resize(_l);
 		}
-		for (size_t i = 0; i < _l; i++) {
-			for (size_t j = 0; j < _w; j++) {
-				_px[i][j] = false;
+		for (size_t i = 0; i < _w; i++) {
+			for (size_t j = 0; j < _l; j++)
+			{
+				_px[i][j] = 0;
 			}
 		}
 	}
 
 	Image(size_t l, size_t w, char value) {
 		if (l <= 0 || w <= 0) throw std::logic_error("incorrect image sizes");
-		if (value < 32 || value > 127) throw std::logic_error("incorrect value");
 		_l = l;
 		_w = w;
-		_px = new char* [_l];
-		for (size_t i = 0; i < _l; i++) {
-			_px[i] = new char[_w];
+		_px.resize(_w);
+		for (size_t i = 0; i < _w; ++i)
+		{
+			_px[i].resize(_l);
 		}
-		for (size_t i = 0; i < _l; i++) {
-			for (size_t j = 0; j < _w; j++) {
+		for (size_t i = 0; i < _w; i++) {
+			for (size_t j = 0; j < _l; j++)
+			{
 				_px[i][j] = value;
 			}
 		}
@@ -43,7 +46,11 @@ public:
 
 	Image& operator =(const Image& v) = default;
 
-	char& operator()(size_t l, size_t w) const {
+	auto begin() const { return _px.begin(); }
+
+	auto end() const { return _px.end(); }
+
+	char& operator()(size_t l, size_t w)  {
 		if (l < 0 || l > _l || w < 0 || w > _w) throw std::out_of_range("invalid index");
 		return _px[l][w];
 	}

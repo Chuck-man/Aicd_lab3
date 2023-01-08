@@ -13,7 +13,7 @@ template <typename T>
 class Image {
 private:
 	size_t _l, _w;
-	vector<vector<T>>  _px;
+	vector<vector<T>> _px;
 
 public:
 	Image() : _l(0), _w(0) {
@@ -45,15 +45,6 @@ public:
 				_px[i][j] = value;
 			}
 		}
-		/*_px = new T * [_l];
-		for (size_t i = 0; i < _l; i++) {
-			_px[i] = new T[_w];
-		}
-		for (size_t i = 0; i < _l; i++) {
-			for (size_t j = 0; j < _w; j++) {
-				_px[i][j] = value;
-			}
-		}*/
 	}
 
 	Image(const Image<T>& another) = default;

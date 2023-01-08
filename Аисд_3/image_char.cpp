@@ -128,9 +128,9 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& out, const Image& obj) {
-		for (size_t i = 0; i < obj._l; i++) {
-			for (size_t j = 0; j < obj._w; j++) {
-				out << "\t" << obj._px[i][j];
+		for (auto i : obj) {
+			for (auto j : i) {
+				out << "\t" << j;
 			}
 			out << "\n";
 		}

@@ -52,7 +52,7 @@ public:
 
 	bool& operator()(size_t l, size_t w) {
 		if (l < 0 || l > _l || w < 0 || w > _w) throw std::out_of_range("invalid index");
-		return _px[l][w];
+		//return _px[l][w];
 	}
 
 	Image operator+(const Image& obj) {
@@ -128,9 +128,9 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& out, const Image& obj) {
-		for (size_t i = 0; i < obj._l; i++) {
-			for (size_t j = 0; j < obj._w; j++) {
-				if (obj._px[i][j])
+		for (auto i : obj) {
+			for (auto j : i) {
+				if (j)
 					out << "\t" << "1";
 				else out << "\t" << ".";
 			}
